@@ -8,10 +8,11 @@ use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Contracts\View\{Factory, View};
 use Illuminate\Database\Eloquent as Eloquent;
 use Illuminate\Database\Eloquent\Concerns\HasAttributes;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Pagination\{AbstractPaginator};
 use Illuminate\Support as Support;
 use Livewire\{Component, WithPagination};
-use PowerComponents\LivewirePowerGrid\Helpers\{Collection, Helpers, Model, SqlSupport};
+use PowerComponents\LivewirePowerGrid\Helpers\{ActionRules, Collection, Helpers, Model, SqlSupport};
 use PowerComponents\LivewirePowerGrid\Themes\ThemeBase;
 use PowerComponents\LivewirePowerGrid\Traits\{BatchableExport,
     Checkbox,
@@ -19,7 +20,9 @@ use PowerComponents\LivewirePowerGrid\Traits\{BatchableExport,
     Filter,
     Listeners,
     PersistData,
-    WithSorting};
+    WithSorting
+};
+use Throwable;
 
 class PowerGridComponent extends Component
 {
@@ -47,7 +50,7 @@ class PowerGridComponent extends Component
 
     public string $currentTable = '';
 
-    public Eloquent\Collection | array | Eloquent\Builder $datasource;
+    public Eloquent\Collection|array|Eloquent\Builder $datasource;
 
     public Support\Collection $withoutPaginatedData;
 
@@ -66,6 +69,8 @@ class PowerGridComponent extends Component
     public array $inputRangeConfig = [];
 
     public bool $showErrorBag = false;
+
+    public string $softDeletes = '';
 
     protected ThemeBase $powerGridTheme;
 
@@ -180,7 +185,7 @@ class PowerGridComponent extends Component
     /**
      * @throws Exception
      */
-    public function fillData(): AbstractPaginator | Support\Collection
+    public function fillData(): AbstractPaginator|Support\Collection
     {
         /** @var Eloquent\Builder|Support\Collection|Eloquent\Collection $datasource */
         $datasource = (!empty($this->datasource)) ? $this->datasource : $this->datasource();
@@ -230,6 +235,8 @@ class PowerGridComponent extends Component
                     ->filterContains()
                     ->filter();
             });
+
+        $results = self::applySoftDeletes($results);
 
         $results = self::applyWithSortStringNumber($results, $sortField);
 
@@ -305,7 +312,7 @@ class PowerGridComponent extends Component
     /**
      * @throws Exception
      */
-    private function resolveCollection(array | Support\Collection | Eloquent\Builder| null $datasource = null): Support\Collection
+    private function resolveCollection(array|Support\Collection|Eloquent\Builder|null $datasource = null): Support\Collection
     {
         if (!boolval(config('livewire-powergrid.cached_data', false))) {
             return new Support\Collection($this->datasource());
@@ -333,7 +340,7 @@ class PowerGridComponent extends Component
         return $results->map(function ($row) {
             $addColumns = $this->addColumns();
 
-            $columns    = $addColumns->columns;
+            $columns = $addColumns->columns;
 
             $columns = collect($columns);
 
@@ -341,7 +348,7 @@ class PowerGridComponent extends Component
             $data = $columns->mapWithKeys(fn ($column, $columnName) => (object) [$columnName => $column((object) $row)]);
 
             if (count($this->actionRules())) {
-                $rules = resolve(Helpers::class)->resolveRules($this->actionRules(), (object) $row);
+                $rules = resolve(ActionRules::class)->resolveRules($this->actionRules(), (object) $row);
             }
 
             $mergedData = $data->merge($rules ?? []);
@@ -362,7 +369,7 @@ class PowerGridComponent extends Component
         return [];
     }
 
-    private function resolveModel(array | Support\Collection | Eloquent\Builder | null  $datasource = null): Support\Collection|array|null|Eloquent\Builder
+    private function resolveModel(array|Support\Collection|Eloquent\Builder|null $datasource = null): Support\Collection|array|null|Eloquent\Builder
     {
         if (blank($datasource)) {
             return $this->datasource();
@@ -412,6 +419,28 @@ class PowerGridComponent extends Component
         data_set($this->setUp, "detail.state.$id", !boolval(data_get($this->setUp, "detail.state.$id")));
     }
 
+    public function softDeletes(string $softDeletes): void
+    {
+        $this->softDeletes = $softDeletes;
+    }
+
+    /**
+     * @throws Throwable
+     */
+    private function applySoftDeletes(Eloquent\Builder $results): Eloquent\Builder
+    {
+        throw_if(
+            $this->softDeletes && !in_array(SoftDeletes::class, class_uses(get_class($results->getModel())), true), /** @phpstan-ignore-line */
+            new Exception(get_class($results->getModel()) . ' is not using the \Illuminate\Database\Eloquent\SoftDeletes trait')
+        );
+
+        return match ($this->softDeletes) {
+            'withTrashed' => $results->withTrashed(), /** @phpstan-ignore-line */
+            'onlyTrashed' => $results->onlyTrashed(), /** @phpstan-ignore-line */
+            default       => $results
+        };
+    }
+
     /**
      * @return array
      */
@@ -424,6 +453,7 @@ class PowerGridComponent extends Component
             'pg:multiSelect-' . $this->tableName  => 'multiSelectChanged',
             'pg:toggleColumn-' . $this->tableName => 'toggleColumn',
             'pg:eventRefresh-' . $this->tableName => '$refresh',
+            'pg:softDeletes-' . $this->tableName  => 'softDeletes',
         ];
     }
 }

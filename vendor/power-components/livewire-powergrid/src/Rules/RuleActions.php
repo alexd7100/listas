@@ -57,9 +57,9 @@ class RuleActions
     /**
      * Sets the button's given attribute to the given value.
      */
-    public function setAttribute(string $attribute = null, string $value = null): RuleActions
+    public function setAttribute(string $attribute = null, string|array $value = null): RuleActions
     {
-        $this->rule['setAttribute'] = [
+        $this->rule['setAttribute'][] = [
             'attribute' => $attribute,
             'value'     => $value,
         ];
@@ -107,6 +107,16 @@ class RuleActions
     public function caption(string $caption): RuleActions
     {
         $this->rule['caption'] = $caption;
+
+        return $this;
+    }
+
+    public function bladeComponent(string $component, array $params): RuleActions
+    {
+        $this->rule['bladeComponent'] = [
+            'component' => $component,
+            'params'    => $params,
+        ];
 
         return $this;
     }

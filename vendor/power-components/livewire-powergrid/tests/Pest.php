@@ -5,7 +5,8 @@ use Illuminate\Support\Str;
 use Pest\PendingObjects\TestCall;
 use PowerComponents\LivewirePowerGrid\Tests\Models\Dish;
 use PowerComponents\LivewirePowerGrid\Tests\TestCase;
-use PowerComponents\LivewirePowerGrid\{Column,
+use PowerComponents\LivewirePowerGrid\{
+    Column,
     PowerGridComponent,
     Tests\DishesActionRulesTable,
     Tests\DishesActionTable,
@@ -14,14 +15,18 @@ use PowerComponents\LivewirePowerGrid\{Column,
     Tests\DishesEnumTable,
     Tests\DishesMakeTable,
     Tests\DishesSearchableRawTable,
+    Tests\DishesSoftDeletesTable,
     Tests\DishesTable,
-    Tests\DishesTableWithJoin};
+    Tests\DishesTableWithJoin,
+    Tests\RulesAttributesTable,
+    Tests\RulesEmitTable
+};
 
 uses(TestCase::class)->in(__DIR__);
 
 function getLaravelDir(): string
 {
-    return  __DIR__ . '/../vendor/orchestra/testbench-core/laravel/';
+    return __DIR__ . '/../vendor/orchestra/testbench-core/laravel/';
 }
 
 function powergrid(): PowerGridComponent
@@ -126,13 +131,6 @@ dataset('themes', [
     'bootstrap -> dishes.id' => [DishesTableWithJoin::class, (object) ['theme' => 'bootstrap', 'field' => 'dishes.id']],
 ]);
 
-dataset('action', [
-    'tailwind'       => [DishesActionTable::class, (object) ['theme' => 'tailwind', 'join' => false]],
-    'bootstrap'      => [DishesActionTable::class, (object) ['theme' => 'bootstrap', 'join' => false]],
-    'tailwind join'  => [DishesActionTable::class, (object) ['theme' => 'tailwind', 'join' => true]],
-    'bootstrap join' => [DishesActionTable::class, (object) ['theme' => 'bootstrap', 'join' => true]],
-]);
-
 dataset('rules', [
     'tailwind'       => [DishesActionRulesTable::class, (object) ['theme' => 'tailwind', 'join' => false]],
     'bootstrap'      => [DishesActionRulesTable::class, (object) ['theme' => 'bootstrap', 'join' => false]],
@@ -164,6 +162,11 @@ dataset('themes with collection table', [
 dataset('searchable-raw', [
     'tailwind'  => [DishesSearchableRawTable::class, (object) ['theme' => 'tailwind']],
     'bootstrap' => [DishesSearchableRawTable::class, (object) ['theme' => 'bootstrap']],
+]);
+
+dataset('themes with softDeletes', [
+    [DishesSoftDeletesTable::class, 'tailwind'],
+    [DishesSoftDeletesTable::class, 'bootstrap'],
 ]);
 
 /**

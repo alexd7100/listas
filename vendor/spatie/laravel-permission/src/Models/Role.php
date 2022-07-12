@@ -103,11 +103,19 @@ class Role extends Model implements RoleContract
         return $role;
     }
 
+    /**
+     * Find a role by its id (and optionally guardName).
+     *
+     * @param int $id
+     * @param string|null $guardName
+     *
+     * @return \Spatie\Permission\Contracts\Role|\Spatie\Permission\Models\Role
+     */
     public static function findById(int $id, $guardName = null): RoleContract
     {
         $guardName = $guardName ?? Guard::getDefaultName(static::class);
 
-        $role = static::findByParam(['id' => $id, 'guard_name' => $guardName]);
+        $role = static::findByParam([(new static())->getKeyName() => $id, 'guard_name' => $guardName]);
 
         if (! $role) {
             throw RoleDoesNotExist::withId($id);
@@ -122,7 +130,7 @@ class Role extends Model implements RoleContract
      * @param string $name
      * @param string|null $guardName
      *
-     * @return \Spatie\Permission\Contracts\Role
+     * @return \Spatie\Permission\Contracts\Role|\Spatie\Permission\Models\Role
      */
     public static function findOrCreate(string $name, $guardName = null): RoleContract
     {
@@ -185,6 +193,6 @@ class Role extends Model implements RoleContract
             throw GuardDoesNotMatch::create($permission->guard_name, $this->getGuardNames());
         }
 
-        return $this->permissions->contains('id', $permission->id);
+        return $this->permissions->contains($permission->getKeyName(), $permission->getKey());
     }
 }

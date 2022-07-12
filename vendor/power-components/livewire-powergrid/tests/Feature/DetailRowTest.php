@@ -1,10 +1,10 @@
 <?php
 
 use function Pest\Livewire\livewire;
-use PowerComponents\LivewirePowerGrid\Tests\DishesDetailRowTable;
+use PowerComponents\LivewirePowerGrid\Tests\RulesToggleDetailTable;
 
 it('collapse detail row', function () {
-    livewire(DishesDetailRowTable::class)
+    livewire(RulesToggleDetailTable::class)
         ->assertSee('Pastel de Nata')
         ->assertDontSeeHtml([
             '<div>Id 1</div>',
@@ -75,7 +75,7 @@ it('collapse detail row', function () {
 });
 
 it('render x-data correctly for detail row state', function () {
-    $component = livewire(DishesDetailRowTable::class);
+    $component = livewire(RulesToggleDetailTable::class);
 
     $perPage = data_get($component, 'payload.serverMemo.data.setUp.footer.perPage');
     $xData   = [];
