@@ -18,36 +18,36 @@
                         <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
 
                             @can('crear-thesis')
-                            <a type="button" href="{{ route('productos.create') }}" class="bg-gray-500 px-12 py-2 text-gray-200 font-semibold hover:bg-indigo-800 transition duration-200 each-in-out" data-toggle="modal" data-target="#exampleModal">Crear</a>
+                            <a type="button" href="{{ route('articulos_register') }}" class="bg-gray-500 px-12 py-2 text-gray-200 font-semibold hover:bg-indigo-800 transition duration-200 each-in-out" data-toggle="modal" data-target="#exampleModal">Crear</a>
                             @endcan
 
-                            <table id="theses" class="table table-striped table-hover" style="width: 100%;">
+                            <table id="artcl" class="table table-striped table-hover" style="width: 100%;">
                                 <thead>
                                     <tr class="bg-gray-800 text-white">
                                         <th style="display: none;">ID</th>
                                         <th class="border px-4 py-2">REFERENCIA</th>
-                                        <th class="border px-4 py-2">NOMBRE</th>
+                                        <th class="border px-4 py-2">DESCRIPCION</th>
                                         <th style="display: none;" class="border px-4 py-2">ESTADO</th>
                                         <th class="border px-4 py-2">ACCIONES</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($articulos as $articulo)
+                                    @foreach ($articulos as $key => $item)
                                     <tr>
-                                        <th style="display: none;" scope="row">{{ $articulo + 1 }}</th>
-                                        <td>{{ $articulo>reference }}</td>
-                                        <td>{{ $articulo->title }}</td>
-                                        <td style="display: none;">{{ $articulo->state }}</td>
+                                        <th style="display: none;" scope="row">{{ $key + 1 }}</th>
+                                        <td>{{ $item->reference }}</td>
+                                        <td>{{ $item->title }}</td>
+                                        <td style="display: none;">{{ $item->state }}</td>
                                         <div class="flex justify-center rounded-lg text-lg" role="group">
                                             <td width="40%">
-                                                <button type="button" class="rounded bg-gray-400 hover:bg-gray-600 text-white font-bold py-2 px-4" onclick="showFile('{{ $articulo->id }}')">Ver</button>
+                                                <button type="button" class="rounded bg-gray-400 hover:bg-gray-600 text-white font-bold py-2 px-4" onclick="showFile('{{ $item->id }}')">Ver</button>
 
                                                 @can('editar-thesis')
-                                                <button type="button" class="rounded bg-blue-400 hover:bg-gray-500 text-white font-bold py-2 px-4" onclick="modalEdit('{{ $articulo->id }}','{{ $articulo->title }}','{{ $articulo->state }}','{{ $articulo->articulos_code }}')" data-toggle="modal" data-target="#exampleModalEdit">Editar</button>
+                                                <button type="button" class="rounded bg-blue-400 hover:bg-gray-500 text-white font-bold py-2 px-4" onclick="modalEdit('{{ $item->id }}','{{ $item->title }}','{{ $item->state }}','{{ $item->articulos_code }}')" data-toggle="modal" data-target="#exampleModalEdit">Editar</button>
                                                 @endcan 
                                                 
                                                 @can('borrar-thesis')
-                                                <button type="button" class="rounded bg-gray-400 hover:bg-gray-600 text-white font-bold py-2 px-4" onclick="deleteThesis('{{ $articulo->id }}')">Eliminar</button>
+                                                <button type="button" class="rounded bg-gray-400 hover:bg-gray-600 text-white font-bold py-2 px-4" onclick="deleteThesis('{{ $item->id }}')">Eliminar</button>
                                                 @endcan
 
                                             </td>
@@ -71,7 +71,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Nuevo Precio</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Nueva Ficha</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -183,7 +183,7 @@
     $("#btn-update").click(function() {
         var formData = new FormData(document.getElementById("exampleModalEdit"));
         $.ajax({
-            url: "{{ route('thesis_update') }}",
+            url: "{{ route('articulos_update') }}",
             type: "post",
             dataType: "html",
             data: formData,
@@ -201,7 +201,7 @@
 
     function deleteThesis(id) {
         $.ajax({
-            url: "{{ asset('/thesis/delete/') }}/" + id,
+            url: "{{ asset('/articulos/delete/') }}/" + id,
             type: "get",
             dataType: "html",
             contentType: false,
@@ -223,7 +223,7 @@
 
 <script>
     $(document).ready(function() {
-        $('#theses').DataTable();
+        $('#artcl').DataTable();
     });
 </script>
 @endsection

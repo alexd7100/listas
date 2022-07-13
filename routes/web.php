@@ -46,7 +46,7 @@ Route::get('/articulos', function () {
 
 Route::post('/articulos/register', [ArticuloController::class, 'store'])->name('articulos_register');
 Route::get('/articulos/file/{id}', [ArticuloController::class, 'urlfile'])->name('articulos_file');
-Route::post('articulos/update', [ArticuloController::class, 'update'])->name('articulos_update');
+Route::post('/articulos/update', [ArticuloController::class, 'update'])->name('articulos_update');
 Route::get('/articulos/delete/{id}', [ArticuloController::class, 'destroy'])->name('articulos_delete');
 
 Route::group(['middleware' => ['auth']], function () {
