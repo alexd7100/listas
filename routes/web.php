@@ -7,6 +7,8 @@ use App\Models\Articulos;
 use App\Http\Controllers\ArticulosController;
 use App\Models\Listas;
 use App\Http\Controllers\ListasController;
+use App\Models\Hojas;
+use App\Http\Controllers\HojasController;
 use App\Http\Controllers\RolController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\CategoriaController;
@@ -47,6 +49,11 @@ Route::get('/listas', function () {
     return view('listas')->with('listas',$listas);
 })->middleware('auth');
 
+Route::get('/hojas', function () {
+    $hojas = Hojas::all();
+    return view('hojas')->with('hojas',$hojas);
+})->middleware('auth');
+
 Route::post('/thesis/register', [ThesisController::class, 'store'])->name('thesis_register');
 Route::get('/thesis/file/{id}', [ThesisController::class, 'urlfile'])->name('thesis_file');
 Route::post('/thesis/update', [ThesisController::class, 'update'])->name('thesis_update');
@@ -61,6 +68,11 @@ Route::post('/listas/register', [ListasController::class, 'store'])->name('lista
 Route::get('/listas/file/{id}', [ListasController::class, 'urlfile'])->name('listas_file');
 Route::post('/listas/update', [ListasController::class, 'update'])->name('listas_update');
 Route::get('/listas/delete/{id}', [ListasController::class, 'destroy'])->name('listas_delete');
+
+Route::post('/hojas/register', [HojasController::class, 'store'])->name('hojas_register');
+Route::get('/hojas/file/{id}', [HojasController::class, 'urlfile'])->name('hojas_file');
+Route::post('/hojas/update', [HojasController::class, 'update'])->name('hojas_update');
+Route::get('/hojas/delete/{id}', [HojasController::class, 'destroy'])->name('hojas_delete');
 
 Route::group(['middleware' => ['auth']], function () {
     Route::resource('roles', RolController::class);

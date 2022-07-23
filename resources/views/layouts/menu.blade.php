@@ -2,6 +2,9 @@
     <a class="nav-link" href="/home">
         <i class=" fas fa-building"></i><span>Dashboard</span>
     </a>
+    <a class="nav-link" href="https://sealco.us/cons_despachos/login/login.php">
+        <i class=" fas fa-users"></i><span>Ordenes de Despacho</span>
+    </a>
     <a class="nav-link" href="/usuarios">
         <i class=" fas fa-users"></i><span>Usuarios</span>
     </a>
@@ -23,7 +26,7 @@
     <a class="nav-link" href="/listas">
         <i class=" fas fa-dollar-sign"></i><span>Precios Exterior</span>
     </a>
-    <a class="nav-link" href="#">
+    <a class="nav-link" href="/hojas">
         <i class=" fas fa-folder"></i><span>Hojas de Seguridad</span>
     </a>
 </li>

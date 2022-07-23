@@ -612,6 +612,8 @@ class ComposerStaticInitfd75a59804b585d316300eba40e3637f
         'App\\Models\\Articulos' => __DIR__ . '/../..' . '/app/Models/Articulos.php',
         'App\\Models\\ArticulosFile' => __DIR__ . '/../..' . '/app/Models/ArticulosFile.php',
         'App\\Models\\Categoria' => __DIR__ . '/../..' . '/app/Models/Categoria.php',
+        'App\\Models\\Hojas' => __DIR__ . '/../..' . '/app/Models/Hojas.php',
+        'App\\Models\\HojasFile' => __DIR__ . '/../..' . '/app/Models/HojasFile.php',
         'App\\Models\\Listas' => __DIR__ . '/../..' . '/app/Models/Listas.php',
         'App\\Models\\ListasFile' => __DIR__ . '/../..' . '/app/Models/ListasFile.php',
         'App\\Models\\Producto' => __DIR__ . '/../..' . '/app/Models/Producto.php',
