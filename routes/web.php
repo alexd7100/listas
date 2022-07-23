@@ -2,13 +2,15 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Models\Thesis;
+use App\Http\Controllers\ThesisController;
+use App\Models\Articulos;
+use App\Http\Controllers\ArticulosController;
 use App\Http\Controllers\RolController;
 use App\Http\Controllers\UsuarioController;
-use App\Http\Controllers\ArticuloController;
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\ProductoController;
-use App\Http\Controllers\ThesisController;
-use App\Models\Articulo;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -34,20 +36,20 @@ Route::get('/thesis', function () {
     return view('thesis')->with('theses',$theses);
 })->middleware('auth');
 
+Route::get('/articulos', function () {
+    $articulos = Articulos::all();
+    return view('articulos')->with('articulos',$articulos);
+})->middleware('auth');
+
 Route::post('/thesis/register', [ThesisController::class, 'store'])->name('thesis_register');
 Route::get('/thesis/file/{id}', [ThesisController::class, 'urlfile'])->name('thesis_file');
 Route::post('/thesis/update', [ThesisController::class, 'update'])->name('thesis_update');
 Route::get('/thesis/delete/{id}', [ThesisController::class, 'destroy'])->name('thesis_delete');
 
-Route::get('/articulos', function () {
-    $articulos = Articulo::all();
-    return view('articulos')->with('articulos',$articulos);
-})->middleware('auth');
-
-Route::post('/articulos/register', [ArticuloController::class, 'store'])->name('articulos_register');
-Route::get('/articulos/file/{id}', [ArticuloController::class, 'urlfile'])->name('articulos_file');
-Route::post('/articulos/update', [ArticuloController::class, 'update'])->name('articulos_update');
-Route::get('/articulos/delete/{id}', [ArticuloController::class, 'destroy'])->name('articulos_delete');
+Route::post('/articulos/register', [ArticulosController::class, 'store'])->name('articulos_register');
+Route::get('/articulos/file/{id}', [ArticulosController::class, 'urlfile'])->name('articulos_file');
+Route::post('/articulos/update', [ArticulosController::class, 'update'])->name('articulos_update');
+Route::get('/articulos/delete/{id}', [ArticulosController::class, 'destroy'])->name('articulos_delete');
 
 Route::group(['middleware' => ['auth']], function () {
     Route::resource('roles', RolController::class);
@@ -55,7 +57,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('categorias', CategoriaController::class); 
     Route::resource('productos', ProductoController::class);      
 });
-
 
 
 

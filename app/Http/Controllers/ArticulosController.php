@@ -2,37 +2,40 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Thesis;
-use App\Models\ThesisFile;
+use App\Models\Articulos;
+use App\Models\ArticulosFile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
-class ThesisController extends Controller
-{
 
+class ArticulosController extends Controller
+{
+    //
+    
     function __construct()
     {
-        $this->middleware('permission:ver-thesis|crear-thesis|editar-thesis|borrar-thesis',['only'=>['index']]);
-        $this->middleware('permission:crear-thesis', ['only'=>['create','store']]);
-        $this->middleware('permission:editar-thesis', ['only'=>['edit','update']]);
-        $this->middleware('permission:borrar-thesis', ['only'=>['destroy']]);
+        $this->middleware('permission:ver-articulos|crear-thesis|editar-articulos|borrar-articulos',['only'=>['index']]);
+        $this->middleware('permission:crear-articulos', ['only'=>['create','store']]);
+        $this->middleware('permission:editar-articulos', ['only'=>['edit','update']]);
+        $this->middleware('permission:borrar-articulos', ['only'=>['destroy']]);
     }
+
 
     public function store(Request $request){
 
-        $max_code = Thesis::select(
-            DB::raw(' (IFNULL(MAX(RIGHT(thesis_code,7)),0)) AS number_max')
+        $max_code = Articulos::select(
+            DB::raw(' (IFNULL(MAX(RIGHT(articulos_codigo,7)),0)) AS number_max')
         )->first();
 
         $year = date('Y');
-        $code = 'DOC'.$year.'-'.str_pad($max_code->number_max +1, 7, "0", STR_PAD_LEFT);
+        $code = 'PRE'.$year.'-'.str_pad($max_code->number_max +1, 7, "0", STR_PAD_LEFT);
 
-        $thesis = Thesis::create([
-            'thesis_code' => $code,
-            'title' => $request->input('title'),
-            'reference' => $request->input('reference'),
-            'state' => ($request->input('state')?$request->input('state'):0)
+        $articles = Articulos::create([
+            'articulos_codigo' => $code,
+            'titulo' => $request->input('titulo'),
+            'referencia' => $request->input('referencia'),
+            'estado' => ($request->input('estado')?$request->input('estado'):0)
         ]);
 
         $file = $request->file('file');
@@ -43,10 +46,10 @@ class ThesisController extends Controller
             if($foo == 'pdf'){
                 $route_file = $code.DIRECTORY_SEPARATOR.date('Ymdhmi').'.'.$foo;
                 Storage::disk('public')->put($route_file,\File::get($file));
-                ThesisFile::create([
-                    'thesis_id' => $thesis->id,
+                ArticulosFile::create([
+                    'articulos_id' => $articles->id,
                     'url' => $route_file,
-                    'name' => $filename
+                    'nombre' => $filename
                 ]);
                 return response()->json(['response' => [
                         'msg' => 'Registro Completado',
@@ -61,25 +64,26 @@ class ThesisController extends Controller
         }
 
     }
-    public function urlfile($thesis_id){
-        $file = ThesisFile::where('thesis_id',$thesis_id)->where('state',1)->first();
+
+    public function urlfile($articulos_id){
+        $file = ArticulosFile::where('articulos_id',$articulos_id)->where('estado',1)->first();
         return response()->json(['response' => [
             'url' => $file->url,
-            'name' => $file->name,
+            'nombre' => $file->nombre,
             ]
         ], 201);
     }
 
     public function update(Request $request){
-        $id = $request->input('thesis_id');
-        $code = $request->input('thesis_code');
-        Thesis::where('id',$id)->update([
-            'title' => $request->input('title'),
-            'reference' => $request->input('reference'),
-            'state' => ($request->input('state')?$request->input('state'):0)
+        $id = $request->input('articulos_id');
+        $code = $request->input('articulos_code');
+        Articulos::where('id',$id)->update([
+            'titulo' => $request->input('titulo'),
+            'referencia' => $request->input('referencia'),
+            'estado' => ($request->input('estado')?$request->input('estado'):0)
         ]);
 
-        ThesisFile::where('thesis_id',$id)->update(['state'=>0]);
+        ArticulosFile::where('articulos_id',$id)->update(['estado'=>0]);
 
         $file = $request->file('file');
         if($file){
@@ -88,10 +92,10 @@ class ThesisController extends Controller
             if($foo == 'pdf'){
                 $route_file = $code.DIRECTORY_SEPARATOR.date('Ymdhmi').'.'.$foo;
                 Storage::disk('public')->put($route_file,\File::get($file));
-                ThesisFile::create([
-                    'thesis_id' => $id,
+                ArticulosFile::create([
+                    'articulos_id' => $id,
                     'url' => $route_file,
-                    'name' => $filename
+                    'nombre' => $filename
                 ]);
                 return response()->json(['response' => [
                         'msg' => 'Se actualizo Correctamente',
@@ -108,10 +112,12 @@ class ThesisController extends Controller
     }
 
     public function destroy($id){
-        Thesis::where('id',$id)->delete();
+        Articulos::where('id',$id)->delete();
         return response()->json(['response' => [
             'msg' => 'Eliminado Correctamente',
             ]
         ], 201);
     }
+
+
 }

@@ -43,7 +43,7 @@
                                                 <button type="button" class="rounded bg-gray-400 hover:bg-gray-600 text-white font-bold py-2 px-4" onclick="showFile('{{ $item->id }}')">Ver</button>
 
                                                 @can('editar-thesis')
-                                                <button type="button" class="rounded bg-blue-400 hover:bg-gray-500 text-white font-bold py-2 px-4" onclick="modalEdit('{{ $item->id }}','{{ $item->title }}','{{ $item->state }}','{{ $item->thesis_code }}')" data-toggle="modal" data-target="#exampleModalEdit">Editar</button>
+                                                <button type="button" class="rounded bg-blue-400 hover:bg-gray-500 text-white font-bold py-2 px-4" onclick="modalEdit('{{ $item->id }}','{{ $item->title }}','{{ $item->reference }}','{{ $item->state }}','{{ $item->thesis_code }}')" data-toggle="modal" data-target="#exampleModalEdit">Editar</button>
                                                 @endcan 
                                                 
                                                 @can('borrar-thesis')
@@ -71,7 +71,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Nueva Ficha</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Nueva Ficha Técnica</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -106,7 +106,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Editar Ficha</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Editar Ficha Técnica</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -115,6 +115,8 @@
                 <div class="form-group">
                     <label for="title">Titulo</label>
                     <input type="text" class="form-control" id="title-edit" name="title">
+                    <label for="title">Referencia</label>
+                    <input type="text" class="form-control" id="reference-edit" name="reference">
                     <input type="hidden" id="thesis_id" name="thesis_id">
                     <input type="hidden" id="thesis_code" name="thesis_code">
                 </div>
@@ -138,9 +140,10 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 
 <script>
-    function modalEdit(id, tit, est, cod) {
+    function modalEdit(id, tit, ref, est, cod) {
         $('#title-edit').val(tit);
         $('#state-edit').val(est);
+        $('#reference-edit').val(ref);
         $('#thesis_id').val(id);
         $('#thesis_code').val(cod);
     }

@@ -20,10 +20,10 @@
     <a class="nav-link" href="/articulos">
         <i class=" fas fa-money-bill-wave"></i><span>Precios Nacionales</span>
     </a>
-    <a class="nav-link" href="/">
+    <a class="nav-link" href="#">
         <i class=" fas fa-dollar-sign"></i><span>Precios Exterior</span>
     </a>
-    <a class="nav-link" href="/">
+    <a class="nav-link" href="#">
         <i class=" fas fa-folder"></i><span>Hojas de Seguridad</span>
     </a>
 </li>

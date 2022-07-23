@@ -17,11 +17,11 @@
 
                         <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
 
-                            @can('crear-thesis')
-                            <a type="button" href="{{ route('articulos_register') }}" class="bg-gray-500 px-12 py-2 text-gray-200 font-semibold hover:bg-indigo-800 transition duration-200 each-in-out" data-toggle="modal" data-target="#exampleModal">Crear</a>
+                            @can('crear-articulos')
+                            <a type="button" href="{{ route('productos.create') }}" class="bg-gray-500 px-12 py-2 text-gray-200 font-semibold hover:bg-indigo-800 transition duration-200 each-in-out" data-toggle="modal" data-target="#exampleModal">Crear</a>
                             @endcan
 
-                            <table id="artcl" class="table table-striped table-hover" style="width: 100%;">
+                            <table id="articles" class="table table-striped table-hover" style="width: 100%;">
                                 <thead>
                                     <tr class="bg-gray-800 text-white">
                                         <th style="display: none;">ID</th>
@@ -35,18 +35,18 @@
                                     @foreach ($articulos as $key => $item)
                                     <tr>
                                         <th style="display: none;" scope="row">{{ $key + 1 }}</th>
-                                        <td>{{ $item->reference }}</td>
-                                        <td>{{ $item->title }}</td>
-                                        <td style="display: none;">{{ $item->state }}</td>
+                                        <td>{{ $item->referencia }}</td>
+                                        <td>{{ $item->titulo }}</td>
+                                        <td style="display: none;">{{ $item->estado }}</td>
                                         <div class="flex justify-center rounded-lg text-lg" role="group">
                                             <td width="40%">
                                                 <button type="button" class="rounded bg-gray-400 hover:bg-gray-600 text-white font-bold py-2 px-4" onclick="showFile('{{ $item->id }}')">Ver</button>
 
-                                                @can('editar-thesis')
-                                                <button type="button" class="rounded bg-blue-400 hover:bg-gray-500 text-white font-bold py-2 px-4" onclick="modalEdit('{{ $item->id }}','{{ $item->title }}','{{ $item->state }}','{{ $item->articulos_code }}')" data-toggle="modal" data-target="#exampleModalEdit">Editar</button>
+                                                @can('editar-articulos')
+                                                <button type="button" class="rounded bg-blue-400 hover:bg-gray-500 text-white font-bold py-2 px-4" onclick="modalEdit('{{ $item->id }}','{{ $item->titulo }}','{{ $item->referencia }}','{{ $item->estado }}','{{ $item->articulos_code }}')" data-toggle="modal" data-target="#exampleModalEdit">Editar</button>
                                                 @endcan 
                                                 
-                                                @can('borrar-thesis')
+                                                @can('borrar-articulos')
                                                 <button type="button" class="rounded bg-gray-400 hover:bg-gray-600 text-white font-bold py-2 px-4" onclick="deleteThesis('{{ $item->id }}')">Eliminar</button>
                                                 @endcan
 
@@ -71,26 +71,26 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Nueva Ficha</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Nuevo Precio</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
                 <div class="form-group">
-                    <label for="title">Titulo</label>
-                    <input type="text" class="form-control" id="title" name="title">
+                    <label for="titulo">Titulo</label>
+                    <input type="text" class="form-control" id="titulo" name="titulo">
                 </div>
                 <div class="form-group">
-                    <label for="reference">Referencia</label>
-                    <input type="text" class="form-control" id="reference" name="reference">
+                    <label for="referencia">Referencia</label>
+                    <input type="text" class="form-control" id="referencia" name="referencia">
                 </div>
                 <div class="form-group">
                     <label for="exampleFormControlFile1">Archivo</label>
                     <input type="file" class="form-control-file" id="exampleFormControlFile1" name="file">
                 </div>
                 <div class="form-group form-check">
-                    <input type="checkbox" value="1" checked class="form-check-input" id="exampleCheck1" name="state">
+                    <input type="checkbox" value="1" checked class="form-check-input" id="exampleCheck1" name="estado">
                     <label class="form-check-label" for="exampleCheck1">Activo</label>
                 </div>
             </div>
@@ -106,7 +106,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Editar Ficha</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Editar Precio</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -114,17 +114,19 @@
             <div class="modal-body">
                 <div class="form-group">
                     <label for="title">Titulo</label>
-                    <input type="text" class="form-control" id="title-edit" name="title">
+                    <input type="text" class="form-control" id="titulo-edit" name="titulo">
+                    <label for="title">Referencia</label>
+                    <input type="text" class="form-control" id="referencia-edit" name="referencia">
                     <input type="hidden" id="articulos_id" name="articulos_id">
-                    <input type="hidden" id="articulos_code" name="articulos_code">
+                    <input type="hidden" id="articulos_codigo" name="articulos_codigo">
                 </div>
                 <div class="form-group">
                     <label for="file-edit">Archivo</label>
                     <input type="file" class="form-control-file" id="file-edit" name="file">
                 </div>
                 <div class="form-group form-check">
-                    <input type="checkbox" value="1" checked class="form-check-input" id="state-edit" name="state">
-                    <label class="form-check-label" for="state-edit">Activo</label>
+                    <input type="checkbox" value="1" checked class="form-check-input" id="estado-edit" name="estado">
+                    <label class="form-check-label" for="estado-edit">Activo</label>
                 </div>
             </div>
             <div class="modal-footer">
@@ -138,9 +140,10 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 
 <script>
-    function modalEdit(id, tit, est, cod) {
-        $('#title-edit').val(tit);
-        $('#state-edit').val(est);
+    function modalEdit(id, tit, ref, est, cod) {
+        $('#titulo-edit').val(tit);
+        $('#estado-edit').val(est);
+        $('#referencia-edit').val(ref);
         $('#articulos_id').val(id);
         $('#articulos_code').val(cod);
     }
@@ -223,7 +226,7 @@
 
 <script>
     $(document).ready(function() {
-        $('#artcl').DataTable();
+        $('#articles').DataTable();
     });
 </script>
 @endsection

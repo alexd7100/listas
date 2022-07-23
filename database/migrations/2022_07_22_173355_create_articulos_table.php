@@ -13,15 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        //
-        Schema::create('articulos_files', function (Blueprint $table) {
+        Schema::create('articulos', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('articulos_id');
-            $table->string('url',500);
-            $table->string('name');
-            $table->boolean('state')->default(true);
+            $table->string('referencia');
+            $table->string('articulos_codigo')->index();
+            $table->string('titulo');
+            $table->boolean('estado')->default(true);
             $table->timestamps();
-            $table->foreign('articulos_id','articulos_files_articulo_id_fk')->references('id')->on('articulos')->onDelete('cascade');
         });
     }
 
@@ -32,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('articles');
     }
 };

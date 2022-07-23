@@ -45,12 +45,12 @@ class SeederTablaPermisos extends Seeder
             'editar-thesis',
             'borrar-thesis',
             //Articulos
-            'ver-articulo',
-            'crear-articulo',
-            'editar-articulo',
-            'borrar-articulo',
+            'ver-articulos',
+            'crear-articulos',
+            'editar-articulos',
+            'borrar-articulos',
             //Listas Nacionales
-            'ver-listasn',
+            /* 'ver-listasn',
             'crear-listasn',
             'editar-listasn',
             'borrar-listasn',
@@ -59,12 +59,11 @@ class SeederTablaPermisos extends Seeder
             'crear-listase',
             'editar-listase',
             'borrar-listase',
-            //Hojas
-            //Listas Nacionales
+            //Hojas Seguridad
             'ver-hojas',
             'crear-hojas',
             'editar-hojas',
-            'borrar-hojas',
+            'borrar-hojas', */
         ];
         foreach($permisos as $permiso){
             Permission::create(['name'=>$permiso]);
