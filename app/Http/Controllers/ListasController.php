@@ -11,6 +11,14 @@ use Illuminate\Support\Facades\Storage;
 class ListasController extends Controller
 {
     //
+    function __construct()
+    {
+        $this->middleware('permission:ver-listas|crear-listas|editar-listas|borrar-listas',['only'=>['index']]);
+        $this->middleware('permission:crear-listas', ['only'=>['create','store']]);
+        $this->middleware('permission:editar-listas', ['only'=>['edit','update']]);
+        $this->middleware('permission:borrar-listas', ['only'=>['destroy']]);
+    }
+
     public function store(Request $request){
 
         $max_code = Listas::select(

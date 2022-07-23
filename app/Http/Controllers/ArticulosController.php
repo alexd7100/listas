@@ -15,7 +15,7 @@ class ArticulosController extends Controller
     
     function __construct()
     {
-        $this->middleware('permission:ver-articulos|crear-thesis|editar-articulos|borrar-articulos',['only'=>['index']]);
+        $this->middleware('permission:ver-articulos|crear-articulos|editar-articulos|borrar-articulos',['only'=>['index']]);
         $this->middleware('permission:crear-articulos', ['only'=>['create','store']]);
         $this->middleware('permission:editar-articulos', ['only'=>['edit','update']]);
         $this->middleware('permission:borrar-articulos', ['only'=>['destroy']]);

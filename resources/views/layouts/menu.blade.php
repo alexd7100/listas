@@ -2,7 +2,7 @@
     <a class="nav-link" href="/home">
         <i class=" fas fa-building"></i><span>Dashboard</span>
     </a>
-    <a class="nav-link" href="https://sealco.us/cons_despachos/login/login.php">
+    <a class="nav-link" href="https://sealco.us/cons_despachos/login/login.php" Target="_blank">
         <i class=" fas fa-users"></i><span>Ordenes de Despacho</span>
     </a>
     <a class="nav-link" href="/usuarios">

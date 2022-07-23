@@ -17,7 +17,7 @@
 
                         <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
 
-                            @can('crear-thesis')
+                            @can('crear-listas')
                             <a type="button" href="{{ route('productos.create') }}" class="bg-gray-500 px-12 py-2 text-gray-200 font-semibold hover:bg-indigo-800 transition duration-200 each-in-out" data-toggle="modal" data-target="#exampleModal">Crear</a>
                             @endcan
 
@@ -42,11 +42,11 @@
                                             <td width="40%">
                                                 <button type="button" class="rounded bg-gray-400 hover:bg-gray-600 text-white font-bold py-2 px-4" onclick="showFile('{{ $item->id }}')">Ver</button>
 
-                                                @can('editar-thesis')
+                                                @can('editar-listas')
                                                 <button type="button" class="rounded bg-blue-400 hover:bg-gray-500 text-white font-bold py-2 px-4" onclick="modalEdit('{{ $item->id }}','{{ $item->title }}','{{ $item->reference }}','{{ $item->state }}','{{ $item->listas_code }}')" data-toggle="modal" data-target="#exampleModalEdit">Editar</button>
                                                 @endcan 
                                                 
-                                                @can('borrar-thesis')
+                                                @can('borrar-listas')
                                                 <button type="button" class="rounded bg-gray-400 hover:bg-gray-600 text-white font-bold py-2 px-4" onclick="deleteThesis('{{ $item->id }}')">Eliminar</button>
                                                 @endcan
 
@@ -106,7 +106,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Editar Ficha Técnica</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Editar Lista de Precio</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>

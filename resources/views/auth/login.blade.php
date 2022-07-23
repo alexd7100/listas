@@ -4,7 +4,7 @@
 @endsection
 @section('content')
     <div class="card card-primary">
-        <div class="card-header"><h4>SEALCO S.A.</h4></div>
+        <div class="card-header"><h4>PORTAL DE SERVICIOS INFORMATIVOS</h4></div>
 
         <div class="card-body">
             <form method="POST" action="{{ route('login') }}">
