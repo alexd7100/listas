@@ -5,11 +5,12 @@ use App\Models\Thesis;
 use App\Http\Controllers\ThesisController;
 use App\Models\Articulos;
 use App\Http\Controllers\ArticulosController;
+use App\Models\Listas;
+use App\Http\Controllers\ListasController;
 use App\Http\Controllers\RolController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\ProductoController;
-
 
 
 /*
@@ -41,6 +42,11 @@ Route::get('/articulos', function () {
     return view('articulos')->with('articulos',$articulos);
 })->middleware('auth');
 
+Route::get('/listas', function () {
+    $listas = Listas::all();
+    return view('listas')->with('listas',$listas);
+})->middleware('auth');
+
 Route::post('/thesis/register', [ThesisController::class, 'store'])->name('thesis_register');
 Route::get('/thesis/file/{id}', [ThesisController::class, 'urlfile'])->name('thesis_file');
 Route::post('/thesis/update', [ThesisController::class, 'update'])->name('thesis_update');
@@ -50,6 +56,11 @@ Route::post('/articulos/register', [ArticulosController::class, 'store'])->name(
 Route::get('/articulos/file/{id}', [ArticulosController::class, 'urlfile'])->name('articulos_file');
 Route::post('/articulos/update', [ArticulosController::class, 'update'])->name('articulos_update');
 Route::get('/articulos/delete/{id}', [ArticulosController::class, 'destroy'])->name('articulos_delete');
+
+Route::post('/listas/register', [ListasController::class, 'store'])->name('listas_register');
+Route::get('/listas/file/{id}', [ListasController::class, 'urlfile'])->name('listas_file');
+Route::post('/listas/update', [ListasController::class, 'update'])->name('listas_update');
+Route::get('/listas/delete/{id}', [ListasController::class, 'destroy'])->name('listas_delete');
 
 Route::group(['middleware' => ['auth']], function () {
     Route::resource('roles', RolController::class);
