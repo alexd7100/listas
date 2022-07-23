@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('css')
-<link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap4.min.css">
+<link rel="stylesheet" href="{{asset('css/dataTables.bootstrap4.min.css')}}">
 @endsection
 
 @section('content')
@@ -33,7 +33,7 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($articulos as $key => $item)
-                                    <tr>
+                                    <tr class="text-center">
                                         <th style="display: none;" scope="row">{{ $key + 1 }}</th>
                                         <td>{{ $item->referencia }}</td>
                                         <td>{{ $item->titulo }}</td>
@@ -137,7 +137,7 @@
     </div>
 </form>
 
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="{{asset('js/jquery-3.5.1.slim.min.js')}}"></script>
 
 <script>
     function modalEdit(id, tit, ref, est, cod) {

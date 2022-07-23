@@ -15,7 +15,7 @@
     <link href="{{ asset('assets/css/select2.min.css') }}" rel="stylesheet" type="text/css"/>
 
     <!-- Fonts -->
-    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('assets/css/tailwind.min.css') }}">
 
 @yield('page_css')
 <!-- Template CSS -->
