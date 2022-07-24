@@ -6,15 +6,15 @@
     <title>@yield('title') | {{ config('app.name') }}</title>
 
     <!-- General CSS Files -->
-    <link href="{{ secure_asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css"/>
-    <link rel="stylesheet" href="{{ secure_asset('css/font-awesome.min.css') }}">
+    <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}">
 
     <!-- Template CSS -->
-    <link rel="stylesheet" href="{{ secure_asset('web/css/style.css') }}">
-    <link rel="stylesheet" href="{{ secure_asset('web/css/components.css')}}">
-    <link rel="stylesheet" href="{{ secure_asset('assets/css/iziToast.min.css') }}">
-    <link href="{{ secure_asset('assets/css/sweetalert.css') }}" rel="stylesheet" type="text/css"/>
-    <link href="{{ secure_asset('assets/css/select2.min.css') }}" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="{{ asset('web/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('web/css/components.css')}}">
+    <link rel="stylesheet" href="{{ asset('assets/css/iziToast.min.css') }}">
+    <link href="{{ asset('assets/css/sweetalert.css') }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('assets/css/select2.min.css') }}" rel="stylesheet" type="text/css"/>
 </head>
 
 <body>
@@ -24,7 +24,7 @@
             <div class="row">
                 <div class="col-md-6 offset-md-3">
                     <div class="login-brand">
-                        <img src="{{ secure_asset('img/logo.png') }}" alt="logo" width="100"
+                        <img src="{{ asset('img/logo.png') }}" alt="logo" width="100"
                              class="shadow-light">
                     </div>
                     @yield('content')
@@ -38,16 +38,16 @@
 </div>
 
 <!-- General JS Scripts -->
-<script src="{{ secure_asset('assets/js/jquery.min.js') }}"></script>
-<script src="{{ secure_asset('assets/js/popper.min.js') }}"></script>
-<script src="{{ secure_asset('assets/js/bootstrap.min.js') }}"></script>
-<script src="{{ secure_asset('assets/js/jquery.nicescroll.js') }}"></script>
+<script src="{{ asset('assets/js/jquery.min.js') }}"></script>
+<script src="{{ asset('assets/js/popper.min.js') }}"></script>
+<script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('assets/js/jquery.nicescroll.js') }}"></script>
 
 <!-- JS Libraies -->
 
 <!-- Template JS File -->
-<script src="{{ secure_asset('web/js/stisla.js') }}"></script>
-<script src="{{ secure_asset('web/js/scripts.js') }}"></script>
+<script src="{{ asset('web/js/stisla.js') }}"></script>
+<script src="{{ asset('web/js/scripts.js') }}"></script>
 <!-- Page Specific JS File -->
 </body>
 </html>
