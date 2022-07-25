@@ -54,7 +54,7 @@ Route::get('/hojas', function () {
     return view('hojas')->with('hojas',$hojas);
 })->middleware('auth');
 
-Route::post('/thesis/register', [ThesisController::class, 'store', 'https'])->name('thesis_register');
+Route::post('/thesis/register', [ThesisController::class, 'store'])->name('thesis_register');
 Route::get('/thesis/file/{id}', [ThesisController::class, 'urlfile'])->name('thesis_file');
 Route::post('/thesis/update', [ThesisController::class, 'update'])->name('thesis_update');
 Route::get('/thesis/delete/{id}', [ThesisController::class, 'destroy'])->name('thesis_delete');
