@@ -66,7 +66,7 @@
 </section>
 
 <!-- Modal -->
-<form enctype="multipart/form-data" class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<form enctype="multipart/form-data" method="POST" class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     @csrf
     <div class="modal-dialog">
         <div class="modal-content">
