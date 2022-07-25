@@ -22,7 +22,7 @@ class ThesisController extends Controller
     public function store(Request $request){
 
         $max_code = Thesis::select(
-            DB::raw(' (NULLIF(MAX(RIGHT(thesis_code,7)),0)) AS number_max')
+            DB::raw(' (SELECT(IFNULL(MAX(RIGHT(thesis_code,7)),0)) AS number_max')
         )->first();
 
         $year = date('Y');
