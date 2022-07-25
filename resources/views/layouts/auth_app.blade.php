@@ -38,16 +38,16 @@
 </div>
 
 <!-- General JS Scripts -->
-<script src="{{ asset('assets/js/jquery.min.js') }}"></script>
-<script src="{{ asset('assets/js/popper.min.js') }}"></script>
-<script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
-<script src="{{ asset('assets/js/jquery.nicescroll.js') }}"></script>
+<script src="{{ secure_asset('assets/js/jquery.min.js') }}"></script>
+<script src="{{ secure_asset('assets/js/popper.min.js') }}"></script>
+<script src="{{ secure_asset('assets/js/bootstrap.min.js') }}"></script>
+<script src="{{ secure_asset('assets/js/jquery.nicescroll.js') }}"></script>
 
 <!-- JS Libraies -->
 
 <!-- Template JS File -->
-<script src="{{ asset('web/js/stisla.js') }}"></script>
-<script src="{{ asset('web/js/scripts.js') }}"></script>
+<script src="{{ secure_asset('web/js/stisla.js') }}"></script>
+<script src="{{ secure_asset('web/js/scripts.js') }}"></script>
 <!-- Page Specific JS File -->
 </body>
 </html>
