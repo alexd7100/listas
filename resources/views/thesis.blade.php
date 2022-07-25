@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('css')
-<link rel="stylesheet" href="{{asset('css/dataTables.bootstrap4.min.css')}}">
+<link rel="stylesheet" href="{{secure_asset('css/dataTables.bootstrap4.min.css')}}">
 @endsection
 
 @section('content')
@@ -137,7 +137,7 @@
     </div>
 </form>
 
-<script src="{{asset('js/jquery-3.5.1.slim.min.js')}}"></script>
+<script src="{{secure_asset('js/jquery-3.5.1.slim.min.js')}}"></script>
 
 <script>
     function modalEdit(id, tit, ref, est, cod) {
@@ -171,7 +171,7 @@
 
     function showFile(id) {
         $.ajax({
-            url: "{{ asset('/thesis/file/') }}/" + id,
+            url: "{{ secure_asset('/thesis/file/') }}/" + id,
             type: "get",
             dataType: "html",
             contentType: false,
@@ -204,7 +204,7 @@
 
     function deleteThesis(id) {
         $.ajax({
-            url: "{{ asset('/thesis/delete/') }}/" + id,
+            url: "{{ secure_asset('/thesis/delete/') }}/" + id,
             type: "get",
             dataType: "html",
             contentType: false,
