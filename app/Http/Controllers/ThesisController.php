@@ -22,11 +22,11 @@ class ThesisController extends Controller
     public function store(Request $request){
 
         $max_code = Thesis::select(
-            /* DB::raw(' (IFNULL(MAX(RIGHT(thesis_code,7)),0)) AS number_max') */
+            DB::raw(' (IFNULL(MAX(RIGHT(thesis_code,7)),0)) AS number_max')
         )->first();
 
         $year = date('Y');
-        $code = 'DOC'.$year.'-'.str_pad($max_code->number_max +1, 7, "0", STR_PAD_LEFT);
+        $code = 'DOC'.$year.'-'.str_pad("0", STR_PAD_LEFT);
 
         $thesis = Thesis::create([
             'thesis_code' => $code,
