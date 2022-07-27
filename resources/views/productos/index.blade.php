@@ -34,7 +34,7 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($productos as $producto)
-                                    <tr>
+                                    <tr class="text-center">
                                         <td style="display: none;">{{$producto->id}}</td>
                                         <td>{{$producto->nombre}}</td>
                                         <td>{{$producto->descripcion}}</td>
@@ -46,7 +46,7 @@
                                             <div class="flex justify-center rounded-lg text-lg" role="group">
                                                 <!-- botón editar -->
                                                 @can('editar-producto')
-                                                <a href="{{ route('productos.edit', $producto->id) }}" class="rounded bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4">Editar</a>
+                                                <a href="{{ route('productos.edit', $producto->id) }}" class="rounded bg-gray-500 hover:bg-gray-600 text-white font-thin py-1 px-2">Editar</a>
                                                 @endcan
 
                                                 <!-- botón borrar -->
@@ -55,7 +55,7 @@
                                                     @method('DELETE')
 
                                                     @can('borrar-producto')
-                                                    <button type="submit" class="rounded bg-blue-400 hover:bg-gray-500 text-white font-bold py-2 px-4">Borrar</button>
+                                                    <button type="submit" class="rounded bg-blue-400 hover:bg-gray-500 text-white font-thin py-1 px-2">Borrar</button>
                                                     @endcan
                                                 </form>
                                             </div>

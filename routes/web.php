@@ -13,6 +13,7 @@ use App\Http\Controllers\RolController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\ProductoController;
+use App\Http\Controllers\TransitoController;
 
 
 /*
@@ -78,7 +79,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('roles', RolController::class);
     Route::resource('usuarios', UsuarioController::class);
     Route::resource('categorias', CategoriaController::class); 
-    Route::resource('productos', ProductoController::class);      
+    Route::resource('productos', ProductoController::class);
+    Route::resource('transitos', TransitoController::class);     
 });
 
 

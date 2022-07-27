@@ -31,7 +31,7 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($categorias as $categoria)
-                                    <tr>
+                                    <tr class="text-center">
                                         <td style="display: none;">{{$categoria->id}}</td>
                                         <td>{{$categoria->nombre}}</td>
                                         <td class="border px-4 py-2">
@@ -39,7 +39,7 @@
                                                 <!-- botón editar -->
 
                                                 @can('editar-categoria')
-                                                <a href="{{ route('categorias.edit', $categoria->id) }}" class="rounded bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4">Editar</a>
+                                                <a href="{{ route('categorias.edit', $categoria->id) }}" class="rounded bg-gray-500 hover:bg-gray-600 text-white font-semibold py-1 px-2">Editar</a>
                                                 @endcan
 
                                                 <!-- botón borrar -->
@@ -48,7 +48,7 @@
                                                     @method('DELETE')
 
                                                     @can('borrar-categoria')
-                                                    <button type="submit" class="rounded bg-blue-400 hover:bg-gray-500 text-white font-bold py-2 px-4">Borrar</button>
+                                                    <button type="submit" class="rounded bg-blue-400 hover:bg-gray-500 text-white font-bold py-1 px-2">Borrar</button>
                                                     @endcan
                                                 </form>
                                             </div>

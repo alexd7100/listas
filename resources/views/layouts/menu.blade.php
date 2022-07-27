@@ -20,10 +20,10 @@
     <a class="nav-link" href="/thesis">
         <i class=" fas fa-edit"></i><span>Fichas Técnicas</span>
     </a>
-    <a class="nav-link" href="/articulos">
+    <a class="nav-link" href="/transitos">
         <i class=" fas fa-money-bill-wave"></i><span>Precios Nacionales</span>
     </a>
-    <a class="nav-link" href="/listas">
+    <a class="nav-link" href="/transitos">
         <i class=" fas fa-dollar-sign"></i><span>Precios Exterior</span>
     </a>
     <a class="nav-link" href="/hojas">
